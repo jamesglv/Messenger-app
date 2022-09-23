@@ -28,6 +28,12 @@
 		4CE100D828DD328200D40C77 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 4CE100D728DD328200D40C77 /* FirebaseDatabase */; };
 		4CE100DA28DD34E100D40C77 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4CE100D928DD34E100D40C77 /* GoogleService-Info.plist */; };
 		4CE100DC28DD570E00D40C77 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE100DB28DD570E00D40C77 /* DatabaseManager.swift */; };
+		4CE100DF28DE5ECD00D40C77 /* MessageKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4CE100DE28DE5ECD00D40C77 /* MessageKit */; };
+		4CE100E228DE5F5400D40C77 /* JGProgressHUD-SwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 4CE100E128DE5F5400D40C77 /* JGProgressHUD-SwiftUI */; };
+		4CE100E528DE609A00D40C77 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 4CE100E428DE609A00D40C77 /* Realm */; };
+		4CE100E728DE609A00D40C77 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4CE100E628DE609A00D40C77 /* RealmSwift */; };
+		4CE100EA28DE613900D40C77 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 4CE100E928DE613900D40C77 /* SDWebImage */; };
+		4CE100EC28DE613900D40C77 /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4CE100EB28DE613900D40C77 /* SDWebImageMapKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,9 +83,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4CE100E528DE609A00D40C77 /* Realm in Frameworks */,
+				4CE100EC28DE613900D40C77 /* SDWebImageMapKit in Frameworks */,
 				4CE100D828DD328200D40C77 /* FirebaseDatabase in Frameworks */,
+				4CE100EA28DE613900D40C77 /* SDWebImage in Frameworks */,
+				4CE100E728DE609A00D40C77 /* RealmSwift in Frameworks */,
 				4CE100D428DD328200D40C77 /* FirebaseAnalytics in Frameworks */,
+				4CE100E228DE5F5400D40C77 /* JGProgressHUD-SwiftUI in Frameworks */,
 				4CE100D628DD328200D40C77 /* FirebaseAuth in Frameworks */,
+				4CE100DF28DE5ECD00D40C77 /* MessageKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -236,6 +248,12 @@
 				4CE100D328DD328200D40C77 /* FirebaseAnalytics */,
 				4CE100D528DD328200D40C77 /* FirebaseAuth */,
 				4CE100D728DD328200D40C77 /* FirebaseDatabase */,
+				4CE100DE28DE5ECD00D40C77 /* MessageKit */,
+				4CE100E128DE5F5400D40C77 /* JGProgressHUD-SwiftUI */,
+				4CE100E428DE609A00D40C77 /* Realm */,
+				4CE100E628DE609A00D40C77 /* RealmSwift */,
+				4CE100E928DE613900D40C77 /* SDWebImage */,
+				4CE100EB28DE613900D40C77 /* SDWebImageMapKit */,
 			);
 			productName = Messenger;
 			productReference = 4CE1008A28DC18E900D40C77 /* Messenger.app */;
@@ -311,6 +329,10 @@
 			mainGroup = 4CE1008128DC18E900D40C77;
 			packageReferences = (
 				4CE100D228DD328100D40C77 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				4CE100DD28DE5ECB00D40C77 /* XCRemoteSwiftPackageReference "MessageKit" */,
+				4CE100E028DE5F5200D40C77 /* XCRemoteSwiftPackageReference "JGProgressHUD-SwiftUI" */,
+				4CE100E328DE609A00D40C77 /* XCRemoteSwiftPackageReference "realm-swift" */,
+				4CE100E828DE613600D40C77 /* XCRemoteSwiftPackageReference "SDWebImage" */,
 			);
 			productRefGroup = 4CE1008B28DC18E900D40C77 /* Products */;
 			projectDirPath = "";
@@ -722,6 +744,38 @@
 				minimumVersion = 9.0.0;
 			};
 		};
+		4CE100DD28DE5ECB00D40C77 /* XCRemoteSwiftPackageReference "MessageKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/MessageKit/MessageKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
+		4CE100E028DE5F5200D40C77 /* XCRemoteSwiftPackageReference "JGProgressHUD-SwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/JonasGessner/JGProgressHUD-SwiftUI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.1;
+			};
+		};
+		4CE100E328DE609A00D40C77 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.30.0;
+			};
+		};
+		4CE100E828DE613600D40C77 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -739,6 +793,36 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4CE100D228DD328100D40C77 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseDatabase;
+		};
+		4CE100DE28DE5ECD00D40C77 /* MessageKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4CE100DD28DE5ECB00D40C77 /* XCRemoteSwiftPackageReference "MessageKit" */;
+			productName = MessageKit;
+		};
+		4CE100E128DE5F5400D40C77 /* JGProgressHUD-SwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4CE100E028DE5F5200D40C77 /* XCRemoteSwiftPackageReference "JGProgressHUD-SwiftUI" */;
+			productName = "JGProgressHUD-SwiftUI";
+		};
+		4CE100E428DE609A00D40C77 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4CE100E328DE609A00D40C77 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		4CE100E628DE609A00D40C77 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4CE100E328DE609A00D40C77 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+		4CE100E928DE613900D40C77 /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4CE100E828DE613600D40C77 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
+		4CE100EB28DE613900D40C77 /* SDWebImageMapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4CE100E828DE613600D40C77 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImageMapKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
