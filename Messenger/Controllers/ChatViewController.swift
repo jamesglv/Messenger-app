@@ -43,7 +43,6 @@ extension ChatViewController: MessagesDataSource, MessagesDisplayDelegate, Messa
     var currentSender: SenderType {
         return selfSender
     }
-    
     func messageForItem(at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageType {
         return messages[indexPath.section]
     }
