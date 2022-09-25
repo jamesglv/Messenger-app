@@ -37,11 +37,12 @@ class ConversationsViewController: UIViewController {
                                                             action: #selector(didTapComposeButton))
         view.addSubview(tableView)
         view.addSubview(noConversationsLabel)
-        fetchConversations()
+        
         setupTableView()
+        fetchConversations()
     }
     
-    @objc func didTapComposeButton() {
+    @objc private func didTapComposeButton() {
         let vc = NewConversationViewController()
         let navVC = UINavigationController(rootViewController: vc)
         present(navVC, animated: true)
@@ -78,6 +79,7 @@ class ConversationsViewController: UIViewController {
 }
 
 extension ConversationsViewController: UITableViewDelegate, UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
