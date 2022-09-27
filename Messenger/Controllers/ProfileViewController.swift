@@ -23,11 +23,11 @@ class ProfileViewController: UIViewController {
     }
     
     func createTableHeader() -> UIView? {
-        guard let email = UserDefaults.standard.value(forKey: "email") as? String else {
-            return nil
-        }
+//        guard let email = UserDefaults.standard.value(forKey: "email") as? String else {
+//            return nil
+//        }
         
-        let safeEmail = DatabaseManager.safeEmail(emailAddress: email)
+        //let safeEmail = DatabaseManager.safeEmail(emailAddress: email)
         let headerView = UIView(frame: CGRect(x: 0,
                                         y: 0,
                                         width: view.width,

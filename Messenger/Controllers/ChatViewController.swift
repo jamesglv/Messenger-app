@@ -147,7 +147,7 @@ extension ChatViewController: MessagesDataSource, MessagesDisplayDelegate, Messa
             return sender
         }
         fatalError("Self Sender is nil, email should be cached")
-        return Sender(senderId: "12", displayName: "")
+        //return Sender(senderId: "12", displayName: "")
     }
     func messageForItem(at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageType {
         return messages[indexPath.section]
