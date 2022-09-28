@@ -39,14 +39,14 @@ class ConversationTableViewCell: UITableViewCell {
         super.layoutSubviews()
 
 
-        userNameLabel.frame = CGRect(x: 10,
+        userNameLabel.frame = CGRect(x: 25,
                                      y: 10,
-                                     width: contentView.width - 20,
+                                     width: contentView.width - 60,
                                      height: (contentView.height-20)/2)
 
-        userMessageLabel.frame = CGRect(x: 10,
-                                        y: userNameLabel.bottom + 10,
-                                        width: contentView.width - 20,
+        userMessageLabel.frame = CGRect(x: 25,
+                                        y: userNameLabel.bottom,
+                                        width: contentView.width - 60,
                                         height: (contentView.height-20)/2)
 
     }

@@ -63,14 +63,20 @@ class ConversationsViewController: UIViewController {
         guard let email = UserDefaults.standard.value(forKey: "email") as? String else {
             return
         }
+        print("Starting conversation fetch")
         let safeEmail = DatabaseManager.safeEmail(emailAddress: email)
         DatabaseManager.shared.getAllConversations(for: safeEmail, completion: { [weak self] result in
             switch result {
             case .success(let conversations):
+                print("successfully got conversations")
                 guard !conversations.isEmpty else {
                     return
                 }
                 self?.conversations = conversations
+                
+                DispatchQueue.main.async {
+                    self?.tableView.reloadData()
+                }
             case .failure(let error):
                 print("failed to get convos \(error)")
             }
@@ -91,7 +97,7 @@ class ConversationsViewController: UIViewController {
               let email = result["email"] else {
                 return
         }
-        let vc = ChatViewController(with: email)
+        let vc = ChatViewController(with: email, id: nil)
         vc.isNewConversation = true
         vc.title = name
         vc.navigationItem.largeTitleDisplayMode = .never
@@ -132,21 +138,26 @@ class ConversationsViewController: UIViewController {
 extension ConversationsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return conversations.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = "Hello"
-        cell.accessoryType = .disclosureIndicator
+        let model = conversations[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: ConversationTableViewCell.identifier,
+                                                 for: indexPath) as! ConversationTableViewCell
+        cell.configure(with: model)
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        let model = conversations[indexPath.row]
         
-        let vc = ChatViewController(with: "sdfdsf@gmail.com")
-        vc.title = "Jenny Smith"
+        let vc = ChatViewController(with: model.otherUserEmail, id: model.id)
+        vc.title = model.name
         vc.navigationItem.largeTitleDisplayMode = .never
         navigationController?.pushViewController(vc, animated: true)
+    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 70
     }
 }
