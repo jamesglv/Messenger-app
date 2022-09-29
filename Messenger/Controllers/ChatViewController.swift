@@ -48,6 +48,13 @@ struct Sender: SenderType {
     public var displayName: String
 }
 
+struct Media: MediaItem {
+    var url: URL?
+    var image: UIImage?
+    var placeholderImage: UIImage
+    var size: CGSize
+}
+
 class ChatViewController: MessagesViewController {
 
     public static let dateFormatter: DateFormatter = {
@@ -196,11 +203,53 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true, completion: nil)
         guard let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage,
-              let imageData = image.pngData() else {
+              let imageData = image.pngData(),
+              let messageId = createMessageId(),
+              let conversationId = conversationId,
+              let name = self.title,
+                let selfSender = selfSender else {
             return
         }
         
+        let fileName = "photo_message_" + messageId
+        
         //Upload image
+        
+        StorageManager.shared.uploadMessagePhoto(with: imageData, fileName: fileName, completion: { [weak self] result in
+            guard let strongSelf = self else {
+                return
+            }
+            switch result {
+            case .success(let urlString):
+                //Ready to send message
+                print("Uploaded message photo: \(urlString)")
+                
+                guard let url = URL(string: urlString),
+                      let placeholder = UIImage.init(systemName: "plus") else {
+                    return
+                }
+                
+                let media = Media(url: url, image: nil, placeholderImage: placeholder, size: .zero)
+                
+                let message = Message(sender: selfSender,
+                                      messageId: messageId,
+                                      sentDate: Date(),
+                                      kind: .photo(media))
+                
+                DatabaseManager.shared.sendMessage(to: conversationId, otherUserEmail: strongSelf.otherUserEmail, name: name, newMessage: message, completion: { success in
+                    
+                    if success {
+                        print("Sent photo message")
+                    }
+                    else {
+                        print("failed to send photo message")
+                    }
+                })
+                
+            case .failure(let error):
+                print("message photo upload error: \(error)")
+            }
+        })
         
         //Send Message
     }
