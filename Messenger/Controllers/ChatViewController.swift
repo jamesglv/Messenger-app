@@ -79,9 +79,9 @@ class ChatViewController: MessagesViewController {
         self.conversationId = id
         self.otherUserEmail = email
         super.init(nibName: nil, bundle: nil)
-        if let conversationId = conversationId {
-            listenForMessages(id: conversationId, shouldScrollToBottom: true)
-        }
+//        if let conversationId = conversationId {
+//            listenForMessages(id: conversationId, shouldScrollToBottom: true)
+//        }
     }
     
     required init?(coder: NSCoder) {
@@ -113,8 +113,6 @@ class ChatViewController: MessagesViewController {
                     if shouldScrollToBottom {
                         self?.messagesCollectionView.scrollToLastItem()
                         
-                    } else {
-                        
                     }
                 }
             case .failure(let error):
@@ -126,6 +124,9 @@ class ChatViewController: MessagesViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         messageInputBar.inputTextView.becomeFirstResponder()
+        if let conversationId = conversationId {
+                    listenForMessages(id: conversationId, shouldScrollToBottom: true)
+                }
     }
 }
 
@@ -139,7 +140,7 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
         }
         print("Sending \(text)")
         
-        let message = Message(sender: selfSender,
+        let messageCont = Message(sender: selfSender,
                               messageId: messageId,
                               sentDate: Date(),
                               kind: .text(text))
@@ -148,7 +149,7 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
         if isNewConversation {
             //Create conversation
             
-            DatabaseManager.shared.createNewConversation(with: otherUserEmail, name: self.title ?? "User", firstMessage: message, completion: { [weak self] success in
+            DatabaseManager.shared.createNewConversation(with: otherUserEmail, name: self.title ?? "User", firstMessage: messageCont, completion: { [weak self] success in
                 if success {
                     print("Message sent")
                     self?.isNewConversation = false
@@ -161,7 +162,7 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
             guard let conversationId = conversationId, let name = self.title else {
                 return
             }
-            DatabaseManager.shared.sendMessage(to: conversationId, name: name, newMessage: message, completion: { success in
+            DatabaseManager.shared.sendMessage(to: conversationId, otherUserEmail: otherUserEmail, name: name, newMessage: messageCont, completion: { success in
                 if success {
                     print("Message sent")
                 } else {
