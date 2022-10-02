@@ -79,7 +79,7 @@
         <scene sceneID="X2W-ek-zEw">
             <objects>
                 <navigationController id="pqu-aD-BdF" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Profile" id="tbv-sw-7w9">
+                    <tabBarItem key="tabBarItem" title="Profile" image="person.fill" catalog="system" id="tbv-sw-7w9">
                         <color key="badgeColor" systemColor="opaqueSeparatorColor"/>
                     </tabBarItem>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="QAx-00-w3P">
@@ -98,7 +98,7 @@
         <scene sceneID="jgh-pO-aCi">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="HE6-hW-tgx" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Messages" id="dwm-7N-gGp">
+                    <tabBarItem key="tabBarItem" title="Messages" image="message" catalog="system" id="dwm-7N-gGp">
                         <color key="badgeColor" systemColor="opaqueSeparatorColor"/>
                     </tabBarItem>
                     <toolbarItems/>
@@ -117,6 +117,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="message" catalog="system" width="128" height="113"/>
+        <image name="person.fill" catalog="system" width="128" height="120"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
