@@ -10,9 +10,11 @@ import FirebaseDatabase
 import MessageKit
 import UIKit
 
+/// Manager object to write data to real time Firebase database
 final class DatabaseManager {
 
-    static let shared = DatabaseManager()
+    /// Shared instance of class
+    public static let shared = DatabaseManager()
 
     private let database = Database.database().reference()
 
@@ -25,8 +27,10 @@ final class DatabaseManager {
 }
 
 extension DatabaseManager {
+    
+    /// Returns dictionary node at child path
     public func getDataFor(path: String, completion: @escaping (Result<Any, Error>) -> Void) {
-        self.database.child("\(path)").observeSingleEvent(of: .value) { snapshot in
+        database.child("\(path)").observeSingleEvent(of: .value) { snapshot in
             guard let value = snapshot.value else {
                 completion(.failure(DatabaseError.failedToFetch))
                 return
@@ -40,6 +44,10 @@ extension DatabaseManager {
 
 extension DatabaseManager {
 
+    /// Checks if user exists for given email
+    /// Parameters
+    ///  - `email`:              Target email to be checked
+    ///  - `completion`:   Async closure to return with result
     public func userExists(with email: String,
                            completion: @escaping ((Bool) -> Void)) {
 
@@ -61,14 +69,18 @@ extension DatabaseManager {
         database.child(user.safeEmail).setValue([
             "first_name": user.firstName,
             "last_name": user.lastName
-        ], withCompletionBlock: { error, _ in
+        ], withCompletionBlock: { [weak self] error, _ in
+            
+            guard let strongSelf = self else {
+                return
+            }
             guard error == nil else {
                 print("failed ot write to database")
                 completion(false)
                 return
             }
 
-            self.database.child("users").observeSingleEvent(of: .value, with: { snapshot in
+            strongSelf.database.child("users").observeSingleEvent(of: .value, with: { snapshot in
                 if var usersCollection = snapshot.value as? [[String: String]] {
                     // append to user dictionary
                     let newElement = [
@@ -77,7 +89,7 @@ extension DatabaseManager {
                     ]
                     usersCollection.append(newElement)
 
-                    self.database.child("users").setValue(usersCollection, withCompletionBlock: { error, _ in
+                    strongSelf.database.child("users").setValue(usersCollection, withCompletionBlock: { error, _ in
                         guard error == nil else {
                             completion(false)
                             return
@@ -95,7 +107,7 @@ extension DatabaseManager {
                         ]
                     ]
 
-                    self.database.child("users").setValue(newCollection, withCompletionBlock: { error, _ in
+                    strongSelf.database.child("users").setValue(newCollection, withCompletionBlock: { error, _ in
                         guard error == nil else {
                             completion(false)
                             return
@@ -108,6 +120,7 @@ extension DatabaseManager {
         })
     }
 
+    /// Gets all users from database
     public func getAllUsers(completion: @escaping (Result<[[String: String]], Error>) -> Void) {
         database.child("users").observeSingleEvent(of: .value, with: { snapshot in
             guard let value = snapshot.value as? [[String: String]] else {
@@ -263,6 +276,7 @@ extension DatabaseManager {
             })
         }
     
+    /// Creates collection of messages for given email
     private func finishCreatingConversation(name: String, conversationID: String, firstMessage: Message, completion: @escaping (Bool) -> Void) {
     //        {
     //            "id": String,
@@ -299,12 +313,12 @@ extension DatabaseManager {
                 break
             }
 
-            guard let myEmmail = UserDefaults.standard.value(forKey: "email") as? String else {
+            guard let myEmail = UserDefaults.standard.value(forKey: "email") as? String else {
                 completion(false)
                 return
             }
 
-            let currentUserEmail = DatabaseManager.safeEmail(emailAddress: myEmmail)
+            let currentUserEmail = DatabaseManager.safeEmail(emailAddress: myEmail)
 
             let collectionMessage: [String: Any] = [
                 "id": firstMessage.messageId,
@@ -642,6 +656,7 @@ extension DatabaseManager {
         })
     }
     
+    /// Deletes conversation
     public func deleteConversation(conversationId: String, completion: @escaping (Bool) -> Void){
         guard let email = UserDefaults.standard.value(forKey: "email") as? String else {
             return
@@ -680,6 +695,7 @@ extension DatabaseManager {
         })
     }
     
+    /// Checks if conversation already exists
     public func conversationExists(with targetRecipientEmail: String, completion: @escaping (Result<String, Error>) -> Void) {
         let safeRecipientEmail = DatabaseManager.safeEmail(emailAddress: targetRecipientEmail)
         guard let senderEmail = UserDefaults.standard.value(forKey: "email") as? String else {

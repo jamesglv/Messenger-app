@@ -64,7 +64,8 @@ struct Location: LocationItem {
     var size: CGSize
 }
 
-class ChatViewController: MessagesViewController {
+
+final class ChatViewController: MessagesViewController {
 
     public static let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -494,7 +495,7 @@ extension ChatViewController: MessageCellDelegate {
                 return
             }
             let vc = PhotoViewerViewController(with: imageUrl)
-            self.navigationController?.pushViewController(vc, animated: true)
+            navigationController?.pushViewController(vc, animated: true)
         case .video(let media):
             guard let videoUrl = media.url else {
                 return

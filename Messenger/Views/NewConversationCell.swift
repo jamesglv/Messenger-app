@@ -38,7 +38,7 @@ class NewConversationCell: UITableViewCell {
     }
 
     public func configure(with model: SearchResult) {
-        self.userNameLabel.text = model.name
+        userNameLabel.text = model.name
 
     }
 

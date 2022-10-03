@@ -49,7 +49,6 @@
 		4CE100C428DC1ED600D40C77 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE100C328DC1ED600D40C77 /* LoginViewController.swift */; };
 		4CE100C628DC1EEE00D40C77 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE100C528DC1EEE00D40C77 /* RegisterViewController.swift */; };
 		4CE100C828DC1F4B00D40C77 /* PhotoViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE100C728DC1F4B00D40C77 /* PhotoViewerViewController.swift */; };
-		4CE100CA28DC1F6200D40C77 /* VideoViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE100C928DC1F6200D40C77 /* VideoViewerViewController.swift */; };
 		4CE100CC28DC1FA900D40C77 /* NewConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE100CB28DC1FA900D40C77 /* NewConversationViewController.swift */; };
 		4CE100CE28DC1FC400D40C77 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE100CD28DC1FC400D40C77 /* ProfileViewController.swift */; };
 		4CE100D128DC2DE300D40C77 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE100D028DC2DE200D40C77 /* Extensions.swift */; };
@@ -104,7 +103,6 @@
 		4CE100C328DC1ED600D40C77 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		4CE100C528DC1EEE00D40C77 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		4CE100C728DC1F4B00D40C77 /* PhotoViewerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewerViewController.swift; sourceTree = "<group>"; };
-		4CE100C928DC1F6200D40C77 /* VideoViewerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewerViewController.swift; sourceTree = "<group>"; };
 		4CE100CB28DC1FA900D40C77 /* NewConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewConversationViewController.swift; sourceTree = "<group>"; };
 		4CE100CD28DC1FC400D40C77 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		4CE100D028DC2DE200D40C77 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -200,7 +198,6 @@
 				4CE100D928DD34E100D40C77 /* GoogleService-Info.plist */,
 				4CE100C128DC1C3F00D40C77 /* Resources */,
 				4CE100C028DC1C3000D40C77 /* ViewModels */,
-				4CE100BF28DC1C2300D40C77 /* Models */,
 				4CE100BE28DC1C1D00D40C77 /* Views */,
 				4CE100BD28DC1C0200D40C77 /* Controllers */,
 				4CE1009B28DC18EB00D40C77 /* Info.plist */,
@@ -231,7 +228,6 @@
 				4CE1009128DC18E900D40C77 /* ConversationsViewController.swift */,
 				4CE100CF28DC24C300D40C77 /* Login */,
 				4CE100C728DC1F4B00D40C77 /* PhotoViewerViewController.swift */,
-				4CE100C928DC1F6200D40C77 /* VideoViewerViewController.swift */,
 				4CE100CB28DC1FA900D40C77 /* NewConversationViewController.swift */,
 				4CE100CD28DC1FC400D40C77 /* ProfileViewController.swift */,
 				4CE100EF28DF2A1400D40C77 /* ChatViewController.swift */,
@@ -248,13 +244,6 @@
 				4C9F3E6928E6B2F1001A9735 /* NewConversationCell.swift */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		4CE100BF28DC1C2300D40C77 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		4CE100C028DC1C3000D40C77 /* ViewModels */ = {
@@ -475,7 +464,6 @@
 				4CE100C428DC1ED600D40C77 /* LoginViewController.swift in Sources */,
 				4C9F3E6A28E6B2F2001A9735 /* NewConversationCell.swift in Sources */,
 				4CE100DC28DD570E00D40C77 /* DatabaseManager.swift in Sources */,
-				4CE100CA28DC1F6200D40C77 /* VideoViewerViewController.swift in Sources */,
 				4C9F3E3128E58EDE001A9735 /* StorageManager.swift in Sources */,
 				4CE100CC28DC1FA900D40C77 /* NewConversationViewController.swift in Sources */,
 				4CE100C628DC1EEE00D40C77 /* RegisterViewController.swift in Sources */,

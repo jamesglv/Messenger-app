@@ -22,7 +22,8 @@ struct LatestMessage {
     let isRead: Bool
 }
 
-class ConversationsViewController: UIViewController {
+/// Controller that shows list of conversations
+final class ConversationsViewController: UIViewController {
 
     private let spinner = JGProgressHUD(style: .dark)
     
@@ -233,19 +234,20 @@ extension ConversationsViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Begin Delete
-            let conversationId = conversations[indexPath.row].id
-            tableView.beginUpdates()
-            
-            DatabaseManager.shared.deleteConversation(conversationId: conversationId, completion: { [weak self] success in
-                if success {
-                    self?.conversations.remove(at: indexPath.row)
-                    tableView.deleteRows(at: [indexPath], with: .left)
-                }
-            })
-            
-            tableView.endUpdates()
+            if editingStyle == .delete {
+                // begin delete
+                let conversationId = conversations[indexPath.row].id
+                tableView.beginUpdates()
+                self.conversations.remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .left)
+
+                DatabaseManager.shared.deleteConversation(conversationId: conversationId, completion: { success in
+                    if !success {
+                        // add model and row back and show error alert
+                    }
+                })
+
+                tableView.endUpdates()
         }
     }
 }
