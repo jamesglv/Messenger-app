@@ -154,16 +154,18 @@ class LoginViewController: UIViewController {
                           let lastName = userData["last_name"] as? String else {
                         return
                     }
-                    UserDefaults.standard.set("\(firstName) \(lastName)", forKey: "name")
+                    
+                    UserDefaults.standard.setValue("\(firstName) \(lastName)", forKey: "name")
                     
                 case .failure(let error):
                     print("failed to read error \(error)")
                 }
             })
-            
-            UserDefaults.standard.set(email, forKey: "email")
+            print(email)
+            UserDefaults.standard.setValue(email, forKey: "email")
             
             print("Logged in user: \(user)")
+            print("Logged in user: \(email)")
             strongSelf.navigationController?.dismiss(animated: true, completion: nil)
         })
     }

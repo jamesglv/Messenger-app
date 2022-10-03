@@ -74,7 +74,7 @@ class ChatViewController: MessagesViewController {
         return formatter
     }()
     public let otherUserEmail: String
-    private let conversationId: String?
+    private var conversationId: String?
     
     public var isNewConversation = false
     
@@ -113,6 +113,21 @@ class ChatViewController: MessagesViewController {
         messagesCollectionView.messageCellDelegate = self
         messageInputBar.delegate = self
         setupInputButton()
+        
+        if let layout = messagesCollectionView.collectionViewLayout as? MessagesCollectionViewFlowLayout {
+            layout.textMessageSizeCalculator.outgoingAvatarSize = .zero
+            layout.textMessageSizeCalculator.incomingAvatarSize = .zero
+            layout.photoMessageSizeCalculator.outgoingAvatarSize = .zero
+            layout.photoMessageSizeCalculator.incomingAvatarSize = .zero
+            layout.videoMessageSizeCalculator.outgoingAvatarSize = .zero
+            layout.videoMessageSizeCalculator.incomingAvatarSize = .zero
+            layout.audioMessageSizeCalculator.outgoingAvatarSize = .zero
+            layout.audioMessageSizeCalculator.incomingAvatarSize = .zero
+            layout.locationMessageSizeCalculator.outgoingAvatarSize = .zero
+            layout.locationMessageSizeCalculator.incomingAvatarSize = .zero
+        }
+        
+        
     }
     
     private func setupInputButton() {
@@ -357,7 +372,9 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
             return
         }
         print("Sending \(text)")
-        
+        DispatchQueue.main.async {
+            self.messageInputBar.inputTextView.text = nil
+        }
         let messageCont = Message(sender: selfSender,
                               messageId: messageId,
                               sentDate: Date(),
@@ -371,6 +388,11 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
                 if success {
                     print("Message sent")
                     self?.isNewConversation = false
+                    let newConversationId = "conversation_\(messageCont.messageId)"
+                    self?.conversationId = newConversationId
+                    self?.listenForMessages(id: newConversationId, shouldScrollToBottom: true)
+                    self?.messageInputBar.inputTextView.text = nil
+                    
                 } else {
                     print ("failed to send")
                 }
@@ -425,6 +447,10 @@ extension ChatViewController: MessagesDataSource, MessagesDisplayDelegate, Messa
         return messages.count
     }
     
+    func messagePadding(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UIEdgeInsets {
+            return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    }
+    
     func configureMediaMessageImageView(_ imageView: UIImageView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
         guard let message = message as? Message else {
             return
@@ -438,6 +464,19 @@ extension ChatViewController: MessagesDataSource, MessagesDisplayDelegate, Messa
         default:
             break
         }
+    }
+    
+    func backgroundColor(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UIColor {
+        let sender = message.sender
+        if sender.senderId == selfSender?.senderId {
+            // Our message that we've sent
+            return .link
+        }
+        return .secondarySystemBackground
+        }
+    
+    func configureAvatarView(_ avatarView: AvatarView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
+        avatarView.isHidden = true
     }
 
 }

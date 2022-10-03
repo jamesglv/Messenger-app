@@ -26,14 +26,21 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let profileName = UserDefaults.standard.value(forKey: "name") as? String ?? "No name"
+        let profileEmail = UserDefaults.standard.value(forKey: "email") as? String ?? "No email"
+        
+        print("DATA BELOW")
+        print(data)
+        
         tableView.register(ProfileTableViewCell.self,
                            forCellReuseIdentifier: ProfileTableViewCell.identifier)
         
+
         data.append(ProfileViewModel(viewModelType: .info,
-                                     title: "Hey \(UserDefaults.standard.value(forKey: "name") as? String ?? "Welcome Back")",
+                                     title: "Hey \(profileName)",
                                      handler: nil))
         data.append(ProfileViewModel(viewModelType: .info,
-                                     title: "Email Address \(UserDefaults.standard.value(forKey: "email") as? String ?? "No Email")",
+                                     title: "Email Address \(profileEmail)",
                                      handler: nil))
         data.append(ProfileViewModel(viewModelType: .logout,
                                      title: "Log Out",
@@ -53,6 +60,23 @@ class ProfileViewController: UIViewController {
                 guard let strongSelf = self else {
                     return
                 }
+                
+                UserDefaults.standard.setValue(nil, forKey: "email")
+                UserDefaults.standard.setValue(nil, forKey: "name")
+                
+                print("DATA IS...")
+                print(strongSelf.data)
+                
+                //strongSelf.data.removeAll()
+                //strongSelf.data = [ProfileViewModel]()
+                
+                print("Removed all")
+                print(strongSelf.data)
+                
+                
+//                print(UserDefaults.standard.value(forKey: "email"))
+//                print(UserDefaults.standard.value(forKey: "name"))
+                
                 do {
                     try FirebaseAuth.Auth.auth().signOut()
                     
@@ -67,7 +91,8 @@ class ProfileViewController: UIViewController {
                 }
                 
             }))
-            
+            print("DATA IS...")
+            print(strongSelf.data)
             actionSheet.addAction(UIAlertAction(title: "Cancel",
                                                 style: .cancel,
                                                 handler: nil))
@@ -127,6 +152,8 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 class ProfileTableViewCell: UITableViewCell {
     
     static let identifier = "ProfileTableViewCell"
+    let profileName = UserDefaults.standard.value(forKey: "name") as? String ?? "No name"
+    let profileEmail = UserDefaults.standard.value(forKey: "email") as? String ?? "No email"
     
     public func setUp(with viewModel: ProfileViewModel) {
         self.textLabel?.text = viewModel.title
