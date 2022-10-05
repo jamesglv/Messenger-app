@@ -42,6 +42,10 @@ final class ProfileViewController: UIViewController {
         data.append(ProfileViewModel(viewModelType: .info,
                                      title: "Email Address \(profileEmail)",
                                      handler: nil))
+        // Text templates
+        // Change Password
+        // Change account details
+        
         data.append(ProfileViewModel(viewModelType: .logout,
                                      title: "Log Out",
                                      handler: { [weak self] in

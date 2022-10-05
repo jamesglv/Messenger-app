@@ -9,6 +9,7 @@ import Foundation
 import FirebaseDatabase
 import MessageKit
 import UIKit
+import Alamofire
 
 /// Manager object to write data to real time Firebase database
 final class DatabaseManager {
@@ -152,6 +153,26 @@ extension DatabaseManager {
 
 // MARK: - Sending messages / conversations
 extension DatabaseManager {
+
+    // create post request
+//    public func sendSMS(to: String, from: String, body: String, SID: String, AuthToken: String, parameters: Any) {
+//
+//        let parameters = [
+//            "to": String,
+//            "from": String,
+//            "body": String,
+//            "SID": String,
+//            "AuthToken": String
+//        ]
+//
+//        AF.request("https://\(SID):\(AuthToken)@api.twilio.com/2010-04-01/Accounts/\(SID)/Messages.json", method: .post, parameters: \(parameters)).response { response in
+//          print(response)
+//
+//        }
+//      }
+    
+
+
     
     ///Creates a new conversation with target user email and first message sent
     public func createNewConversation(with otherUserEmail: String, name: String, firstMessage: Message, completion: @escaping (Bool) -> Void) {

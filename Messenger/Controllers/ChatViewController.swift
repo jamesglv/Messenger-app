@@ -12,6 +12,7 @@ import SDWebImage
 import AVFoundation
 import AVKit
 import CoreLocation
+import Alamofire
 
 struct Message: MessageType {
     public var sender: SenderType
@@ -114,6 +115,23 @@ final class ChatViewController: MessagesViewController {
         messagesCollectionView.messageCellDelegate = self
         messageInputBar.delegate = self
         setupInputButton()
+        
+//        let smsTo = "+61403143359",
+//            smsFrom = "+13856666341",
+//            smsBody = "This is another test message - hopefully it works",
+//            userSID = "AC9161e2b64c4aa8c0d24b8a66fcb081b5",
+//            userAuth = "16d14ad1c7bbbf932c11146a47a1ab47"
+        
+        
+        //TwilioManager.shared.sendSMS(to: smsTo, from: smsFrom, body: smsBody, SID: userSID, userAuthToken: userAuth)
+        
+
+        
+
+
+
+        
+        
         
         if let layout = messagesCollectionView.collectionViewLayout as? MessagesCollectionViewFlowLayout {
             layout.textMessageSizeCalculator.outgoingAvatarSize = .zero
@@ -373,6 +391,7 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
             return
         }
         print("Sending \(text)")
+        
         DispatchQueue.main.async {
             self.messageInputBar.inputTextView.text = nil
         }
@@ -387,6 +406,15 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
             
             DatabaseManager.shared.createNewConversation(with: otherUserEmail, name: self.title ?? "User", firstMessage: messageCont, completion: { [weak self] success in
                 if success {
+                    
+                    let smsTo = "+61403143359",
+                        smsFrom = "+13856666341",
+                        userSID = "AC9161e2b64c4aa8c0d24b8a66fcb081b5",
+                        userAuth = "16d14ad1c7bbbf932c11146a47a1ab47"
+                    
+                    print("new conversation: \(text)")
+                    TwilioManager.shared.sendSMS(to: smsTo, from: smsFrom, body: text, SID: userSID, userAuthToken: userAuth)
+                    
                     print("Message sent")
                     self?.isNewConversation = false
                     let newConversationId = "conversation_\(messageCont.messageId)"
@@ -405,6 +433,15 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
             }
             DatabaseManager.shared.sendMessage(to: conversationId, otherUserEmail: otherUserEmail, name: name, newMessage: messageCont, completion: { success in
                 if success {
+                    
+                    let smsTo = "+61403143359",
+                        smsFrom = "+13856666341",
+                        userSID = "AC9161e2b64c4aa8c0d24b8a66fcb081b5",
+                        userAuth = "16d14ad1c7bbbf932c11146a47a1ab47"
+                    
+                    print("Append to DB: \(text)")
+                    TwilioManager.shared.sendSMS(to: smsTo, from: smsFrom, body: text, SID: userSID, userAuthToken: userAuth)
+                    
                     print("Message sent")
                 } else {
                     print("failed to send")

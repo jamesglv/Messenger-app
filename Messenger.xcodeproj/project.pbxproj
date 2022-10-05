@@ -36,6 +36,8 @@
 		4C9F3E6628E5C865001A9735 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 4C9F3E6528E5C865001A9735 /* FirebaseStorage */; };
 		4C9F3E6828E5C865001A9735 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 4C9F3E6728E5C865001A9735 /* FirebaseStorageCombine-Community */; };
 		4C9F3E6A28E6B2F2001A9735 /* NewConversationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9F3E6928E6B2F1001A9735 /* NewConversationCell.swift */; };
+		4C9F3E7128EBC456001A9735 /* TwilioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9F3E7028EBC456001A9735 /* TwilioManager.swift */; };
+		4C9F3E7428EC40E4001A9735 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 4C9F3E7328EC40E4001A9735 /* Alamofire */; };
 		4CD4E11328E315FA00A1D92B /* ConversationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD4E11228E315F900A1D92B /* ConversationTableViewCell.swift */; };
 		4CE1008E28DC18E900D40C77 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE1008D28DC18E900D40C77 /* AppDelegate.swift */; };
 		4CE1009028DC18E900D40C77 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE1008F28DC18E900D40C77 /* SceneDelegate.swift */; };
@@ -86,6 +88,7 @@
 /* Begin PBXFileReference section */
 		4C9F3E3028E58EDD001A9735 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		4C9F3E6928E6B2F1001A9735 /* NewConversationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewConversationCell.swift; sourceTree = "<group>"; };
+		4C9F3E7028EBC456001A9735 /* TwilioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwilioManager.swift; sourceTree = "<group>"; };
 		4CD4E11228E315F900A1D92B /* ConversationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationTableViewCell.swift; sourceTree = "<group>"; };
 		4CE1008A28DC18E900D40C77 /* Messenger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Messenger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CE1008D28DC18E900D40C77 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -129,6 +132,7 @@
 				4C9F3E4228E5C865001A9735 /* FirebaseAuthCombine-Community in Frameworks */,
 				4C9F3E4A28E5C865001A9735 /* FirebaseDynamicLinks in Frameworks */,
 				4CE100E528DE609A00D40C77 /* Realm in Frameworks */,
+				4C9F3E7428EC40E4001A9735 /* Alamofire in Frameworks */,
 				4CE100EC28DE613900D40C77 /* SDWebImageMapKit in Frameworks */,
 				4C9F3E3C28E5C865001A9735 /* FirebaseAppCheck in Frameworks */,
 				4C9F3E5A28E5C865001A9735 /* FirebaseInstallations in Frameworks */,
@@ -261,6 +265,7 @@
 				4CE100D028DC2DE200D40C77 /* Extensions.swift */,
 				4CE100DB28DD570E00D40C77 /* DatabaseManager.swift */,
 				4C9F3E3028E58EDD001A9735 /* StorageManager.swift */,
+				4C9F3E7028EBC456001A9735 /* TwilioManager.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -336,6 +341,7 @@
 				4C9F3E6328E5C865001A9735 /* FirebaseRemoteConfigSwift */,
 				4C9F3E6528E5C865001A9735 /* FirebaseStorage */,
 				4C9F3E6728E5C865001A9735 /* FirebaseStorageCombine-Community */,
+				4C9F3E7328EC40E4001A9735 /* Alamofire */,
 			);
 			productName = Messenger;
 			productReference = 4CE1008A28DC18E900D40C77 /* Messenger.app */;
@@ -416,6 +422,7 @@
 				4CE100E328DE609A00D40C77 /* XCRemoteSwiftPackageReference "realm-swift" */,
 				4CE100E828DE613600D40C77 /* XCRemoteSwiftPackageReference "SDWebImage" */,
 				4C9F3E3228E5C865001A9735 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				4C9F3E7228EC40E4001A9735 /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = 4CE1008B28DC18E900D40C77 /* Products */;
 			projectDirPath = "";
@@ -464,6 +471,7 @@
 				4CE100C428DC1ED600D40C77 /* LoginViewController.swift in Sources */,
 				4C9F3E6A28E6B2F2001A9735 /* NewConversationCell.swift in Sources */,
 				4CE100DC28DD570E00D40C77 /* DatabaseManager.swift in Sources */,
+				4C9F3E7128EBC456001A9735 /* TwilioManager.swift in Sources */,
 				4C9F3E3128E58EDE001A9735 /* StorageManager.swift in Sources */,
 				4CE100CC28DC1FA900D40C77 /* NewConversationViewController.swift in Sources */,
 				4CE100C628DC1EEE00D40C77 /* RegisterViewController.swift in Sources */,
@@ -830,6 +838,14 @@
 				minimumVersion = 9.0.0;
 			};
 		};
+		4C9F3E7228EC40E4001A9735 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 		4CE100D228DD328100D40C77 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
@@ -1007,6 +1023,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4CE100D228DD328100D40C77 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = "FirebaseStorageCombine-Community";
+		};
+		4C9F3E7328EC40E4001A9735 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4C9F3E7228EC40E4001A9735 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
 		};
 		4CE100D328DD328200D40C77 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
