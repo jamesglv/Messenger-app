@@ -86,7 +86,8 @@ extension DatabaseManager {
                     // append to user dictionary
                     let newElement = [
                         "name": user.firstName + " " + user.lastName,
-                        "email": user.safeEmail
+                        "email": user.safeEmail,
+                        "phoneNum": "+13856666341"
                     ]
                     usersCollection.append(newElement)
 
@@ -104,7 +105,8 @@ extension DatabaseManager {
                     let newCollection: [[String: String]] = [
                         [
                             "name": user.firstName + " " + user.lastName,
-                            "email": user.safeEmail
+                            "email": user.safeEmail,
+                            "phoneNum": "+13856666341"
                         ]
                     ]
 
