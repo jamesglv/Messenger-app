@@ -65,6 +65,13 @@ extension DatabaseManager {
 
     }
 
+    /// Inserts subaccount information to user node in database
+    public func insertSubaccountData(friendlyName: String, response: Any){
+        
+        database.child("\(friendlyName)").setValue(response)
+    }
+    
+    
     /// Inserts new user to database
     public func insertUser(with user: ChatAppUser, completion: @escaping (Bool) -> Void) {
         database.child(user.safeEmail).setValue([
@@ -86,8 +93,7 @@ extension DatabaseManager {
                     // append to user dictionary
                     let newElement = [
                         "name": user.firstName + " " + user.lastName,
-                        "email": user.safeEmail,
-                        "phoneNum": "+13856666341"
+                        "email": user.safeEmail
                     ]
                     usersCollection.append(newElement)
 
@@ -105,8 +111,7 @@ extension DatabaseManager {
                     let newCollection: [[String: String]] = [
                         [
                             "name": user.firstName + " " + user.lastName,
-                            "email": user.safeEmail,
-                            "phoneNum": "+13856666341"
+                            "email": user.safeEmail
                         ]
                     ]
 

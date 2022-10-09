@@ -196,6 +196,12 @@ final class RegisterViewController: UIViewController {
                                            emailAddress: email)
                 DatabaseManager.shared.insertUser(with: chatUser, completion: { success in
                     if success {
+                        
+                        let userSID = "AC9161e2b64c4aa8c0d24b8a66fcb081b5",
+                            userAuth = "c5dea1d82676359cd16ccf1aea0121cf",
+                            safeEmail = DatabaseManager.safeEmail(emailAddress: email)
+                        
+                        TwilioManager.shared.createSubAccount(friendlyName: safeEmail, SID: userSID, userAuthToken: userAuth)
 //                        guard let image = strongSelf.imageView.image,
 //                              let data = image.pngData() else {
 //                            return

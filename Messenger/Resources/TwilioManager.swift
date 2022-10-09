@@ -7,6 +7,7 @@
 
 import Foundation
 import Alamofire
+import SwiftyJSON
 
 final class TwilioManager{
     public static let shared = TwilioManager()
@@ -31,7 +32,69 @@ extension TwilioManager {
         return
       }
     
+    public func createSubAccount(friendlyName: String, SID: String, userAuthToken: String) {
+        
+        let parameters = ["FriendlyName": friendlyName]
+        
+        AF.request("https://\(SID):\(userAuthToken)@api.twilio.com/2010-04-01/Accounts.json", method: .post, parameters: parameters).response { response in
+            print(response.result)
+//            AF.request("https://\(SID):\(userAuthToken)@api.twilio.com/2010-04-01/Accounts.json?FriendlyName=\(friendlyName)&PageSize=5", method: .get, parameters: parameters).responseJSON { response in
+                
+            if let url = URL(string:"https://\(SID):\(userAuthToken)@api.twilio.com/2010-04-01/Accounts.json?FriendlyName=\(friendlyName)&PageSize=5") {
+                let task = URLSession.shared.dataTask(with: url) {
+                    data, response, error in
+                    if error != nil {
+                        print(error!)
+                    } else {
+                        if let json = (try? JSONSerialization.jsonObject(with: data!, options: [])) as? NSDictionary {
+                            print(json)
+                            DatabaseManager.shared.insertSubaccountData(friendlyName: friendlyName, response: json["accounts"] ?? "No Data")
+                            self.getAvailableNumbers(SID: SID, userAuthToken: userAuthToken)
+                        }
+//                        if let responseString = String(data: data!, encoding: .utf8) {
+//                            print(responseString)
+//                            DatabaseManager.shared.insertSubaccountData(friendlyName: friendlyName, response: responseString)
+                            //let userSID = responseString
+                            //var emptyDict: [String: String] = [:]
+                        
+                    }
+                
+                }
+                
+                task.resume()
+                //print (response.result)"
+                
+            }
+//            print(SID)
+//            print(userAuthToken)
+//            print(parameters)
+        }
+    }
+    
+    public func getAvailableNumbers(SID: String, userAuthToken: String){
+        
+        if let url = URL(string:"https://\(SID):\(userAuthToken)@api.twilio.com/2010-04-01/Accounts/\(SID)/AvailablePhoneNumbers/AU/Mobile.json?PageSize=1") {
+            let task = URLSession.shared.dataTask(with: url) {
+                data, response, error in
+                if error != nil {
+                    print(error!)
+                } else {
+                    if let json = (try? JSONSerialization.jsonObject(with: data!, options: [])) as? NSDictionary {
+                        print(json)
+                        let chosenNum = json["available_phone_numbers"]
+                        print(chosenNum ?? "No numbers")
+                    }
+                }
+            }
+            
+            task.resume()
+            //print (response.result)"
+            
+        }
+    }
 }
+
+
 
 
 /* WORKING!!! IN VIEWDIDLOAD IN CHATVIEWCONTROLLER

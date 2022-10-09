@@ -108,25 +108,6 @@ final class ChatViewController: MessagesViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        func sendSMS() {
-//
-//        //        let SID = "AC9161e2b64c4aa8c0d24b8a66fcb081b5"
-//        //        let AuthToken = "16d14ad1c7bbbf932c11146a47a1ab47"
-//
-//            let parameters = [
-//              "To": "+61403143359",
-//              "From": "+13856666341",
-//              "Body": "This is a message test"]
-//
-//            AF.request("https://AC9161e2b64c4aa8c0d24b8a66fcb081b5:043f7ad565fcc813a1a892787fbb344c@api.twilio.com/2010-04-01/Accounts/AC9161e2b64c4aa8c0d24b8a66fcb081b5/Messages.json", method: .post, parameters: parameters).response { response in
-//                print(response)
-//            }
-//            print("sent?")
-//            return
-//          }
-//
-        
 
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messagesLayoutDelegate = self
@@ -138,7 +119,6 @@ final class ChatViewController: MessagesViewController {
         let currentNum = UserDefaults.standard.value(forKey: "phoneNum")
         print(currentNum as Any)
         
-
         if let layout = messagesCollectionView.collectionViewLayout as? MessagesCollectionViewFlowLayout {
             layout.textMessageSizeCalculator.outgoingAvatarSize = .zero
             layout.textMessageSizeCalculator.incomingAvatarSize = .zero
